@@ -1,0 +1,414 @@
+Musket Team Labs have released their latest WPS Locked intrusion script VMR-MDK-k2-011x8.sh for kali2.0 users.
+
+	Script was written in and designed for kali-linux2.0 ONLY. Program was tested using a AWUSO36H wifi device.
+
+	The program is essentially a beta as MTeams normally tests a program for a long period of time before releasing for general use. 
+
+	VMR-MDK employs the older version of airmon-ng which is contained within the script. We attempted to use the newer version but when run side by side the older version of airmon-ng was far superior in form and function. We embedded the older airmon-ng into the VMR-MDK-K2-011x8.sh script for portability. No special setup is required.
+
+	The program employs a configuration(config) file. This allows the user to change the settings at anytime during the attack. The config file is also included in the script. When the user has selected a targetAP during program setup, a configfile will be written to the /root/VARMAC_CONFIG folder having the AP name and the mac address of the target.  Hence each target will have its own specific config file written for the user during the setup. This will avoid reaver conflicts and keep the attack, which can span weeks, consistent.
+
+	You can shut this program down and restart. Reaver will continue its brute force from the last WPS pin checked.
+
+
+	Other Programs Required(Dependencies).
+
+	Included with this download is mdk3v1.6. Installing the mdk3 program that supports INVALID SSID does not remove the mdk3 version already present in Kali. It simply installs another version in root which is then used by VMR-MDK-K2-011x8.sh. This version is only used when employing an Invalid ESSID attack. It does not remove the installed mdk3 that comes with kali2.0. To install follow the instructions below. To function the program must be placed in the /root/mdk3-v6 as indicated below.
+
+	To install
+
+	Place the mdk3-v6 folder in root(the root location is required as VMR-MDK looks for it there) 
+
+	cd mdk3-v6
+
+	make
+
+	make install
+
+	This will make a folder in root called:
+
+	/root/mdk3-v6
+
+	Set your permissions
+
+	chmod 755 /root/mdk3-v6/*
+
+	Now test the program
+
+	Try:
+
+	/root/mdk3-v6/mdk3 [Enter]
+   
+	You should get the mdk3 menu.
+
+	Make a monitor with airmon-ng.
+
+	airmon-ng start wlan?
+
+	If you are using the newer airmon-ng, alter the settings to match. This is just a test to see that the Invalid SSID portion functions.
+
+	Then run:
+
+	/root/mdk3-v6/mdk3 mon0 t ?Channel? ?target mac address?  10
+
+	example:
+
+	/root/mdk3-v6/mdk3 mon0 t 1 55:44:33:22:11:00  10   
+
+	Where:
+
+	1 = channel of targetAP
+
+	55:44:33:22:11:00 mac address of the targetAP
+	
+        10 = Injected Frames per seconds
+
+	If you run this against a real target, open airodump-ng to the channel and --bssid of the target and watch the light show. If this attack functions properly as indicated above, consult the configfiledetailed or this help file for a list of mdk3/DDOS selections. 
+
+	Pixiedust Data Sequence Analyzer PDDSA-K2-06.sh is a separate script found in the VMRMDK.zip package. It can check all complete Pixiedust data sequences found in the log files. It can also brute force these sequences.
+
+	A shortened version of PDDSA-K2-06.sh is contained within VMR-MDK-K2-011x8.sh. While VMR-MDK-K2-011x8.sh is running, this shortened Pixie Dust Data Sequence Analyzer will check ONLY the first Pixie Dust Data Sequence found in the logfile output from reaver just before the wash scan starts. If a WPS pin is found, then VMR-MDK-K2-011x8.sh will automatically load this pin into the reaver command line. MTeams have literally cracked the WPA key within one(1) run cycle of VMR-MDK. If you wish to check all the pixie dust data sequences in the logfiles and/or brute force them, then use PDDSA-K2-06.sh.
+
+	To run from root type:
+
+	./PDDSA-K2-06.sh
+
+	Set the permissions with chmod 755 PDDSA-K2-06.sh
+
+	Do not run both programs VMR-MDK-K2-011x8.sh and PDDSA-K2-06.sh concurrently.
+  
+*******New Developments****** 
+
+	Extensive use of this program has shown an unexpected result. Many routers do not respond to reaver at all for long period of time(sometimes for days). However if VMR-MDK is left running against such routers overnight, manytimes the next morning we find the
+program has found the key and shut down. The key is always 12345670. It appears VMR-MDK stresses the firmware to the point where it resets the pin and gives up the key. As the router is not responding to reaver pin requests, reaver continually checks this first pin. When the pin resets the WPA Key is immediately found by reaver and the program dispalys the key on the screen and shuts down.
+
+
+	For those that have not used the VMR-MDK Series before, below is an expansion of its features:
+
+
+Introduction to VMR-MDK Series
+
+	If you have older versions of this program, the older configuration files cannot be used. And due to changes in kali 2.0 only this version will work with the newest kali2.0
+
+	We have added drop down menu features, help files, error handling and AP sensing routines. A default pin generator based on several different programs is also found as a menu option. The computer will input mac addresse, channel and AP name from a drop down menus obtained during a wash scan as selected by the user. You can also input this information manually, in cases where the AP is not broadcasting its ESSID or the router is not seen. Setting a specific mac address to your wifi device is also allowed. 
+
+	The configuration file during the initial setup can be adjusted thru a menu selections page. If you wish to alter the settings once the program is running open the configuration file in use with leafpad and make your changes and save. These changes to the config file will be reload automatically during the program cycle.
+
+	Equipment Required - One(1) wifi device supporting packet injection.
+
+	The zip package
+
+        Enclosed in this zip package is the following.
+
+                  1. VMR-MDK011-K2x8.sh
+                  2. Introductory help files
+                  3. VARMAC_CONFIG folder containing configfiledetailed for reference ONLY!
+		  4. PDDSA-K2-06.sh 
+                  5. mdk3-v6
+
+	This program takes advantage of a previously unrecognized flaw in the WPS locking system on some routers.
+See comments by Soxork2212 in kali-linux forums:
+
+https://forums.kali.org/showthread.php?24286-WPS-Pixie-Dust-Attack-(Offline-WPS-Attack)/page43 Comment 424 dealing with DOS/force rebooting.
+
+	MTeams has been aware of this flaw for over 18 months and have been developing the VMR-MDK series to take advantage of it. 
+
+	Historical Overview:
+
+	Previously is was thought that if a router locked its' WPS system, or wash and reaver indicated that the router was locked, then the only way to obtain WPS pins was to wait till the router reset and the WPS system was open. Suggestions made by soxrok2212 in kali-forums on new ways to reset routers remotely resulted in much testing. The thought was that if the router could be reset by mdk3, then the WPS system would be open and some WPS pins could be collected. Hence if you could reset the router remotely numerous times thru an automated script, you could slowly work thru all 11,000 WPS pins and break the WPA key.
+
+        Musket Teams(MTeams) tested this approach which went nowhere.
+
+        The breakthrough came when MTeams turned their attention to WPS locked routers. It was soon discovered that a small number of WPS locked routers leaked pins. Presumably no one was spending time attacking locked routers. After more testing our affiliated Musket Team C Programmer duplicated our findings that if these same WPS locked routers were subjected to short intense bursts of a mdk3 combinations simultaneously, usually a mixture of DDOS and EAPOL, then the router would allow further pins to be harvested. In these cases the router did not reset, the WPS locking mechanism remained in place and sometimes the router changed channels. But what was important here was that more WPS pins could be collected. These routers would eventually stop providing pins, BUT if subjected to another dose of mdk3, the router would supply another batch of pins.
+
+        As noted above, the only way to make an attack like this feasible, was to automate all these processes - wash, reaver, mdk3 and aireplay-ng into one package and focus this combined arms approach at a susceptible router. The program also had to be adaptive while running, allowing the user to test different timings and mdk3 combinations till the right mix was found - hence the use of a configuration file which can be altered during program operation.
+ 
+
+	Program Setup
+   
+        Place VMR-MDK-K2-011x8.sh in root           
+
+	Set your permissions
+
+	chmod 755 /rooot/VMR-MDK-K2-011x8.sh [Enter]
+
+        WARNING Before running manually remove any wifi virtual monitor ie wlan0mon0 etc made by the newer airmon-ng
+
+	Run by typing ./VMR-MDK-K2-011x8.sh and [Enter]
+
+	Or place in the user/bin folder
+
+	chmod 755 /user/bin/VMR-MDK-K2-011x8.sh [Enter]
+
+	VMR-MDK-K2-011x8.sh [Enter]
+
+
+	Program overview
+
+	During initial program run-up the program makes four(4) folders in root if these folders do not already exist.
+
+		 1. VARMAC_AIRCRACK
+                 2. VARMAC_CONFIG
+                 3. VARMAC_LOGS
+                 4. VARMAC_WASH
+
+	The name of the VARMAC_CONFIG folder CANNOT be changed. All files in the folder however can be renamed as the user requires and you can make as many config files for your different targetAPs as needed. Make sure to set the permissions to allow executing file as program if done manually. The program writes a config file against the target you select automatically and then gives you the option to alter the setting thru a drop down menu. It is only necessary to alter the configuration file with a text editor AFTER the program has started. Hence you DONOT need to prepare a configuration file before starting VMR-MDK. The configfile found with the download is for reference purposes ONLY!
+
+	The program rqrs the four(4) folders referenced above to function. Of importance to the user are the VARMAC_CONFIG and VARMAC_LOGS. As mentioned you can add as many different configuration files as you wish and rename them to fit your targetAP requirements. The only criteria are that the variables within the file must be present and the file MUST be located in the VARMAC_CONFIG folder. The VARMAC_LOGS folder will contain text files off all your reaver attacks.
+   
+	The script automates a number of diverse processes. If default setting are used the script has four(4) stages.
+
+The Four(4) Stages of VMR-MDK-K2-011x8.sh Are Outlined Below: 
+
+	Stage 1 - Reaver/aireplay-ng prescan. Reaver looks for a response from the router. If no response is seen the script jumps to stage 4 and continues to scan for targetAP activity.
+
+	Stage 2 - If router activity is seen, Reaver is run against the router in an attempt to harvest WPS pins. Along with reaver, the script allows two(2) aireplay-ng choices ---fakeauth and --deauth. These can be turned on and off thru the configuration file and can be run concurrently with reaver to induce router response. If the router is seen to respond in a timely manner to reaver requests, aireplay-ng -0 --deauth is normally not required. However routers that do not respond to reaver have been seen to suddenly begin providing pins when hit with a short aireplay-ng -0 deauth burst. 
+
+	Stage 3 - Reaver is shutdown when the time set by LIVE1= has expired and mdk3/DDOS attacks commence using three(3) monitors, each with its own individual mac address. You can choose the mdk3/DDOS attack mix thru the configuration file. There are 15 choices. See the configuration file comments below for details however currently we favor selection 3,4 and 14.
+
+	Stage 4 - Mdk3 is shut down when the time set by MDKLIVE= has expired and the program pauses allowing the router to recover. Pixiewps1.1 is run against the first Pixiedust data sequence found in the file, then a wash scan is started looking for the targetAPs' channel. If during the wash scan the targetAP is seen, then a channel will be assigned. It no targetAP seen, the channel will be set to zero(0) allowing reaver to channel hop seeking the targetAP's channel location. If Pixiewps1.1 finds the WPS pin, it is loaded into the reaver command line automatically when reaver starts again at Stage I.
+
+	At the end of the pause time, all programs are cleared, the wifi adapter and monitor mac addresses are changed and stage 1 restarts.
+
+	The script is primarily driven by TIME(s) set by the user. The program cannot hang on some unrecognized reaver or wash response and cycle endlessly.
+
+	The VMR-MDK-K2-011x8.sh script is primarily designed to break WPS locked routers BUT it can be employed against any WPS system. For non-locked routers just set the live time to 500 seconds or more, MDKTYPE1=0, MDKLIVE=0 and PAUSE=120 and collect pins. It has been seen to obtain router response and collect pins when reaver run from a terminal window obtained no reaction. As noted above, routers which do not respond to reaver have been seen to jump into action after starting aireplay-ng -1 --fakeauth followed by a short burst of aireplay-ng -0 deauth. You can start and stop the program anytime and restart. HOWEVER DO NOT mix your brute force sessions using and then not using --dhsmall. If this setting is changed during the brute forcing of 11,000 pins the pin setting may be reset.
+
+The Configuration File:
+
+	When the config file is loaded an extensive error handling routine exists. The config file details are displayed on the screen for user last minute adjustment. Once the program is running, open the config file in use with leafpad, make the changes and save. The config file is reloaded at the start of stage two(2),three(3) and four(4).
+
+	Variables in the Configuration File. 
+
+	Almost all entries are either y for yes or n for no OR a numeric entry. 
+     
+CHANNEL1=0   Use zero(0) ONLY to allow reaver channel hopping when the targetAP is not found. The program will automatically assign channels. Only set a channel if you are using this program against a WPS system which does not lock, mdk3 is not employed and/or you are sure the router does not jump channels.
+	
+USE_R1=y   Use the -r recurring delay command with reaver. Enter y to use or n to not use.
+
+RX1=3   In the reaver -r x:y  RX1 equals the x (i.e. times) in the -r x:y
+
+RY1=10   In the -r x:y  RY1 equals the y (i.e. seconds delay) in the -r x:y
+
+NOTE: if you enter y in the USE_R1 entry you MUST enter data for RX1= and RY1=  or the program will skip the reaver command line.
+
+LIVE1=120   Enter the number of seconds reaver will run against the router in stage 2
+			
+USE_LONG1=y   This variable refers to the use of a long reaver command line originally suggested by the author of autoreaver. It is the command line of choice when confronting WPS locked routers. Enter either y 	for yes or n for no. Default setting is y
+ 
+MDKTYPE1=3   The MDKTYPE1 variable determines the types of mdk3 to be used. The program allows ten(15) different mdk3 combinations of three(3).
+
+Three(3) mdk3 DOS  enter 1
+
+Three(3) mdk3 EAPOL Packet Flooding enter 2
+
+Two(2)mdk3 DDOS and one(1)mdk3 EAPOL enter 3
+
+One(1)mdk3 DDOS and two(2)mdk3 EAPOL enter 4
+
+Three(3) EAPOL Logoff enter 5
+
+Two(2)mdk3 DDOS and one(1)mdk3 EAPOL Logoff enter 6  
+
+One(1)mdk3 DDOS and two(2)mdk3 EAPOL Logoff enter 7
+
+One(1)mdk3 EAPOL Packet Flooding and two(2)mdk3 EAPOL Logoff enter 8     
+
+Two(2)mdk3 EAPOL Packet Flooding and one(1)mdk3 EAPOL Logoff enter 9
+
+One(1)mdk3 EAPOL Packet Flooding and one(1)mdk3 EAPOL Logoff and one(1) mdk3 DOS enter 10
+
+Three(3) tkiptun-ng enter 11
+
+Three(3) Invalid SSID enter 12
+
+One DDOS(1) and Two(2) Invalid SSID enter 13
+
+Two DDOS(2) and One(1) Invalid SSID enter 14
+
+One(1) DDOS and One(1) EAPOL Packet Flooding and One(1) Invalid SSID enter 15
+
+	From the routers we have seen that respond to this approach, the third(3)choice seems to be the best. However the author of ReVdK3-r1 reports a high success with type 2 or pure EAPOL. The new attack invalid SSID in combination with DOS choice 14 has been seen to bury some routers. Musket Teams have been testing choice 14 also with good results.
+
+			Enter 1 thru 15 or Zero(0) to not use
+
+MDKLIVE=20   The length of time in seconds to DDOS the router in stage three(3). To NOT use mdk3 set MDKLIVE to zero(0) Default setting is 20
+
+PAUSE=120   The time the program will pause allowing the router to reset in stage four(4). A wash scan is run during this period. Default setting is 120. Any setting lower then 120 will be set to 120 seconds.
+
+REAVER_COUNT=y   The program has countdown timers installed for stages 2,3 and 4. Some computers notably laptops may overheat if these counters are used. Users have the choice to turn these counters on y or off n as required.
+
+MDK3_COUNT=n	
+
+WASH_COUNT=y
+
+Choices are (y or n), Default is n. You can turn these counters on y or off n as required.   
+			.
+ADVAN_TIME=500   The Advanced timer is the longest length of time reaver will scan reaver output looking for router activity in stage 1. If no router activity is seen, the program skips mdk3 Stage II and III and goes directly to the pause stage IV. This stops the program from using mdk3 when not required and disrupting potential router recovery.
+Default=120
+
+DAMP_MDK=y   The Dampen MDK3 is used to shut off mdk3 in the event no router activity is seen. If mdk3 is run when a router is attempting to recover it just shuts the router down again, kills the recovery process and stops pin harvesting.
+Choices are (y or n), Default is y
+
+USE_AIRE1=y   Controls the use of aireplay-ng -1 --fakeauth. Choices are (y or n), Default is y
+
+USE_AIRE0=n   Controls the use of aireplay-ng -0 --deauth. Choices are (y or n), Default is y
+
+USE_DHSMALL=y   When running Pixiedust some routers cannot be cracked by pixiewps1.1 if the data is obtained using --dh-small / -S.  However when brute forcing pins from WPS locked routers it is best to use --dh-small / -S in the reaver command line. The solution to this is to use --dh-small by selecting y/Y AND ALSO Select USE_FIRSTPIN=y. See comments in 6 the RETESTPIN variable in the configuration file below.
+
+MACSEL=n   If you suspect mac blocking you can assign a specific mac address anytime. Associated clients are show on the screen. A historical file showing all mac addresses ever seen associated can also be accessed. Path to this file is printed after stage III and IV.
+
+ASSIGN_MAC=   Enter the mac address in this format only 55:44:33:22:11:00 or AA:BB:CC:33:22:11
+
+USE_PIXIE=y   You can have pixiewps1.1 check for a WPS pin at the beginning of the wash scan.
+
+USE_FIRSTPIN=y  Tests to see if the router has reset its WPS pin to 12345670
+
+RETESTPIN=10   Frequency of retest. Entering ten(10) means test every 10 cycles. WE highly suggest you employ this feature especially if the router has just come on line or been reset. 
+
+New Features Expansions
+
+1. You can now set the mac address if you suspect mac address blocking. This can be done anytime thru the configuration file.
+
+	If reaver is running on a specific channel, airodump-ng is also run in a small Eterm window below. Text output is read and any associated clients are displayed on the screen later. You can capture those mac addresses and insert them into the configuration file. The program displays current mac addresses associated. It also keep a record of all mac addresses seen associated to the targetAP. The path to this file, which can be opened with leafpad is also shown.
+
+	The MACSEL variable in the configuration file allows you to turn on this feature.
+
+		MACSEL=  
+
+	The ASSIGN_MAC variable allows you to enter a specific mac address if MACSEL= y/Y. If MACSEL=n/N then the ASSIGN_MAC will be ignored and the program will revert to using random mac addresses at the start of each cycle
+     
+		ASSIGN_MAC=55:44:33:22:11:00
+
+2. The USE_DHSMALL variable in the configuration file.
+
+		USE_DHSMALL=
+
+	We have found when routers show a WPS locked state but still leak some pins that the use of --dh-small seems to get better results. Do not jump between using and not using --dh-small during an attack. If you accidently change this setting during an attack reaver gets confused and may restart the attack by erasing the .wpc file and start all over. Retesting pin 12345670 does not affect your reaver brute force attack as it writes a session file with a different name to a different folder.
+
+3. The USE_PIXIE variable in the configuration file
+
+		USE_PIXIE=
+
+	Pixiewps1.1 can be run just before the wash scan is started. It will try and break ONLY the first valid Pixie Dust Data Sequence found in the log file sent to VARMAC_LOGS. If it obtains the WPS pin, it will automatically load the pin into the reaver command line. You will also see a notice that the pin has been found in the Reaver main menu run during the reaver attack stage I and II.
+
+	  Record the pin. If you shut the computer down before the WPA key is found and restart, set the USE_PIXIE to n or N and insert the WPS pin thru the menu selection during program restart.	If you want to brute force the pin use PDDSA-K2-06.sh. It can access any modded reaver output if stored in the VARMAC_LOGS folder. 
+
+4. There are now 15 various mdk3 attack combinations for selection. Many of these have not been researched thoroughly. See also the configfiledetailed. When selecting DDOS type at the start of the program a small drop-down menu in an Xterm window will appear showingattack choiced.
+
+	The use of EAPOL logoff
+
+		This mdk3 attack requires a client to be associated. Therefore if no client is seen, the program switches to DOS until a client is found.
+
+
+5.  The USE_FIRSTPIN variable in the configuration file
+
+		USE_FIRSTPIN=
+
+	During these attacks, routers sometimes reset their WPS pin to 12345670. Since this is the first pin checked by reaver at the start of the brute force attack, this reset will not be found by reaver as reaver has already tested the pin. This reset can occur anytime. This is why the 99.99% replay attack with reaver works.  You can have VMR-MDK test for this reset by setting the USE_FIRSTPIN=y/Y. The USE_FIRSTPIN=y does not use --dh-small so as to collect PKR data for Pixiedust and only runs 120 seconds regardless of the LIVE1= setting.
+
+6. The RETESTPIN variable in the configuration file
+
+        You can set the frequency of retesting WPS pin 12345670. Each program restart is considered a cycle and each cycle have four(4) stages. If you wish to recheck 12345670 every 10 restart cycles enter 10, if you wish to retest every 20 set 20. If USE_FIRSTPIN=y and RETESTPIN=10 then VMR-MDK will check pin 12345670 at cycle one(1) and --dh-small will not be used. At cycles 2 thru 10 it will continue the brute force attack selected. At cycle 11 it will retest 12345670. Retesting the pin has a further advantage. As we note above, the best results have been seen when using --dh-small / -S with reaver against WPS locked routers that leak pins; however Pixiedust cannot find pins in some cases if --dh-small is used in the reaver command line. Therefore selecting USE_FIRSTPIN=y allows Pixiedust to check a Pixie Dust Data Sequence that was not collected with --dh-small while the brute force attack run by reaver may use --dh-small as selected by the user to facilitate brute force WPS pin harvesting. When reaver retests pin 12345670 or you manually enter a WPS pin thru the menu during setup, it writes a different session file to a different folder so as not to disrupt any ongoing reaver brute force pin count. You can return to your brute force session anytime should a specific WPS pin not work. 
+
+7.  VMR-MDK-K2-011x8.sh now reads the output logs for any WPA key found. If the key is found, the key is displayed on the screen together with the path to the logfile having the key and the program closes with the WPA key on the screen.
+
+
+
+Program Examples
+
+       ADVAN_TIME=500 and DAMP_MDK=y,  reaver will run no longer then 500 seconds scanning for router response in stage 1. If at anytime the router responds to reaver, the prescan monitoring period stops and reaver continues for the period set by LIVE1= in stage 2. If no router response is seen, the reaver scan stage 1 will stop when the ADVAN_TIME of 500 seconds has elapsed and the program will suppress Stage II reaver and stage III DDOS/mdk3 and jump to the stage four(4) wash scan. At the end of the wash scan as set by PAUSE=, All mac setting will be clearer and restarted, Reaver will then begin scanning again for router activity Stage I. Once activity is seen, reaver moves forward to stage 2, collects pins and then runs mdk3 stage 3, and then pauses and scans in stage 4. In short the program will not disrupt the router needlessly and mdk3 is employed only when necessary.
+      
+Choosing Targets
+
+	Not all routers respond to this approach. We have found some Belkin, D-Link and TP-Link showing a WPS locked state can be induced to give up pins.
+
+	First test the router. Run the program with default settings against any WPS locked router and see if some pins are harvested. If the router responds with pins, see if pin collection continues or stops. If pin collection does not stop, there is no reason to employ mdk3. You can just set MDKTYPE=0 MDKLIVE=0  and PAUSE=120. However in almost all cases pin collection halts. In this case:
+
+	1. Set MDKTYPE1=3,4 or 14
+
+	2. Set the MDKLIVE=15 and see if a short burst of mdk3 will result in further pin harvesting. Most times long bursts of mdk3 just lock the router up while short burst cause the router give up more pins and/or change channels. Note the WPS locked state almost never changes. Some routers are very sensitive to even 15 seconds of MDK3 from this program and can disappear for hours. This use of mdk3 in such cases must be explored.
+
+	3. Give the router time to recover in the pause(stage 4).
+
+	4. If the router does not continue giving pins change MDKTYPE1=
+
+	5. If the router locks up and will not respond with anything but EAPOL hangs you have probably crushed the router. Wait till the router eventually resets and set your mdk3 time lower.
+
+	The important point here is that the router has been seen to produce a small number of pins even though it is locked. If you see even once that the router produced WPS pins, stops allowing pin harvesting and then allows more pin collection after being subjected to mdk3 - then the router is vulnerable. Subject the router to small amounts of mdk3 so more pins can be harvested even though the router is seen by wash and reaver as in a locked state. The router may or may not change channels. It may take a while but adjust mdk3 types and mdk3 live time till pin harvesting continues in a cyclic fashion.
+
+	Many times reaver will slowly collect pins and then suddenly jump from 50-60% area to 91% reducing the time required by one-third and then crack the WPA/WPS system when only 95% of the keys were tested.
+
+	If the router provides pins, stops providing pins, and then after mdk3 provides more pins, then it is just a matter of finding the right combinations of times in the four stages. We have seen WPS locked routers which after providing pins for a few cycles locked up permanently. Later it was found that just setting the -r x:y from 3:10 to 3:30 kept the pins collection cycle flowing. 
+ 
+WPS default pins and entering a pin manually.
+
+	When testing pins you have three(3) choices:
+
+		1. Brute Force all 11,000 pins
+		2. Try a default pin generated by several default pin programs embedded in the script.
+		3. Enter a pin that was known to have been used by the router in the past.
+
+	The program has several default pin generators embedded. During program setup you will be given the choice to enter a pin manually or brute force all 11,000 pins. If you choose manual you will then be given the choice to enter a specific pin or have the program compute possible default pins for your choice.
+
+	Reaver stores its brute force work in the etc/reaver folder.
+
+		locate .wpc
+
+		in a terminal window
+
+The Reaver Replay Attack - Handling the 99.99% problem
+
+	If the WPS pin completion runs up to 99.99% and spins endlessly try the following. Shut down VMR-MDK.  Run a attack developed by Musket Teams called the Reaver Replay attack.
+
+	Open a terminal window and run reaver as follows
+
+		reaver -i mon0 -c 1 -b XX:XX:XX:XX:XX:XX -r 3:10 -E -vv -T 1 -t 20 -d 0 -x 30 --mac=00:11:22:33:44:55
+
+	Note we removed the -a and the -f and the -S use DH-SMALL from the original command line.
+
+	Reaver will ask to restore previous session/ SELECT   N - NO!!!
+ 
+	This will start reaver with a new session BUT NOT using DH-Small
+
+	The WPS pin might fall out after a single successful pin request. The use of USE_FIRSTPIN=y will remove the 99.99% problem listed and can considerably shorten the attack time should the router reset its pin during the attack.
+
+
+If reaver cracks the key but no WPA key has been found AND the router is encrypted with WPA (ie router is not open):
+
+  
+	If there is no WPA key, only the WPS PIN type ifconfig. Make sure the mac spoof address you entered into the reaver command line matches the mac address listed against mon0.
+
+	Correct the mac address  mismatch by changing either the reaver command line or spoofing the mac address and run the FOLLOWING COMMAND Again. (Note: use the spoofed mac address in place of  --mac=00:11:22:33:44:55
+
+        You can use the newer version just upplug your wifi device to remove the monitors.Then plugin the device and make a monitor with the newer airmon-ng device and use the command-line below. 
+
+
+	reaver -i mon0 -c 1 -b XX:XX:XX:XX:XX:XX -r 3:10 -E -vv -T 1 -t 20 -d 0 -x 30
+
+	Make sure to not restore the previous session. Type enter and you should now have both the WPS Pin and the WPA Key.                                  
+Macchanging Routines:
+
+	This program was tested on four different computers some using external wifi receivers on long 5 meter usb cables. It was found that if the macchanging routines were not slowed considerably, then occasionally the wifi receiver would fail as the physical device could not respond fast enough to the digital changes being made. Therefore expect anytime the program begins mac spoofing routines that the program slows temporarily.
+
+Xterm Reaver Headings
+
+        When reaver is run in the small Xterm window you will see the word Reaver followed by codes. These codes are used to debug the close to 200 reaver boolean strings.
+
+--dh-small in the command line.
+
+         To prove --dh-small is in the command line, simply note to see if PKR output with reaver is a string of zeros. In most cases (NOT ALL) if PKR is a string of zeros then --dh-small is being used. If a specific WPS pin is being tested --or --dhsmall is not selected in the config file then PKR data is normally series of any hex characters.
+
+
+VMR-MDK is a lab variant released for public use. Musket Team make no programs meant for the commercial benifit of Musket Teams. We make no Utube videos and our download sites donot remit any value to our Teams.
+
+
+        In closing if you wish to thank someone for this program then turn and give a big thanks to soxrok2212 at kali-linux forums - he is the one who started us and others on this journey. As you might see, he has gathered many friends along the way.
+
+	Finally music that helped us down the path was the Milestones Album by SRC - a little known Michigan Band from the 60's as we were definitely Up All Night in the Hall of the Mountain King along the edge of the Plain of Jars.
+   
+
+There are many susceptible routers out there - see if you can find them.
+
+Musket Teams
+
