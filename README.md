@@ -13,15 +13,18 @@ i will not be held responsible for any harm done to your network or router via t
 
 *watch my youtube clip on using the tool here, titled:How to hack WPS locked routers using vmr-mdk with Kali Linux*
 
-**https://www.youtube.com/watch?v=y3ByYdVJFqg**
+`**https://www.youtube.com/watch?v=y3ByYdVJFqg**`
 
 
-Read the "Help Files VMR-MDK-K2-2016R-011x9.txt" file to get a brief on the script what it does and how it works.
-Read the "configfiledetailed" file to learn more about the config and tweaking the way the script works.
+`Read the "Help Files VMR-MDK-K2-2016R-011x9.txt" file to get a brief on the script what it does and how it works.`
+
+`Read the "configfiledetailed" file to learn more about the config and tweaking the way the script works.`
 
 
 Brief Usage:
-` Place VMR-MDK-K2-011x8.sh in root           
+
+``` 
+Place VMR-MDK-K2-011x8.sh in root           
 
 	Set your permissions
 
@@ -43,4 +46,4 @@ Brief Usage:
      2. VARMAC_CONFIG
      3. VARMAC_LOGS
      4. VARMAC_WASH
-                 `
+                 ```
