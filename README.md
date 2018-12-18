@@ -1,4 +1,4 @@
-# VMR-MDK-K2-2016R-011x9
+# :fire: VMR-MDK-K2-2017R-012x4
 VMR-MDK is a script for cracking wps wireless networks
 
 **Mainly used for WPS locked routers**
@@ -16,7 +16,7 @@ i will not be held responsible for any harm done to your network or router via t
 `**https://www.youtube.com/watch?v=y3ByYdVJFqg**`
 
 
-`Read the "Help Files VMR-MDK-K2-2016R-011x9.txt" file to get a brief on the script what it does and how it works.`
+`Read the "Help Files VMR-MDK-K2-2017R-012x4.txt" file to get a brief on the script what it does and how it works.`
 
 `Read the "configfiledetailed" file to learn more about the config and tweaking the way the script works.`
 
@@ -37,7 +37,7 @@ copy the three varmac folders to root [VARMAC_CONFIG, VARMAC_LOGS, VARMAC_WASH]
 	
 `cp -r VARMAC_* /root/`
 
-WARNING Before running manually remove any wifi virtual monitor ie wlan0mon0 etc made by the newer airmon-ng
+:exclamation: WARNING Before running manually remove any wifi virtual monitor ie wlan0mon0 etc made by the newer airmon-ng
 
 Run by the script 
 	
@@ -47,13 +47,13 @@ Run by the script
 	
 Or place in the user/sbin folder, if you want to be able to call it from anywhere
 
-`chmod +x /user/bin/VMR-MDK-K2-011x8.sh`  [Enter]
+`chmod +x /user/bin/VMR-MDK-K2-2017R-012x4.sh`  [Enter]
 
-`VMR-MDK-K2-011x8.sh`   [Enter]
+`VMR-MDK-K2-2017R-012x4.sh`   [Enter]
 
      	
 
-## Extra Modifications
+## :rocket: Extra Modifications
 I have added a diagnostics tool to it to check if your wireless card is injectable and some extras, all you need to do is, cd into the scripts directory and run it
 
 `cd scripts`   <= [enter the scripts dir]
@@ -66,7 +66,7 @@ where wlan0 is whatever your wireless interface is called, you can check this by
 
 
 ################################
-## MAIN ADDITIONS:
+## :boom: MAIN ADDITIONS:
 
 1. I modified the script to properly kill processes and restart network services on ctrl+C
 2. added a test for card injection using aireplay
@@ -75,4 +75,4 @@ where wlan0 is whatever your wireless interface is called, you can check this by
 
 ### check out the chunkingz_help_file.txt for more
 
-:bowtie:
+Done with lots of :heart: :bowtie: 
