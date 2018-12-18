@@ -33,9 +33,11 @@ Set your permissions
 
 :point_right: `chmod +x VMR-MDK-K2-2017R-012x4.sh`  [Enter]
 	
-copy the three varmac folders to root [VARMAC_CONFIG, VARMAC_LOGS, VARMAC_WASH]
+create the three varmac folders in root [VARMAC_CONFIG, VARMAC_LOGS, VARMAC_WASH]
 	
-:point_right: `cp -r VARMAC_* /root/`
+:point_right: `mkdir VARMAC_CONFIG /root/`
+:point_right: `mkdir VARMAC_LOGS /root/`
+:point_right: `mkdir VARMAC_WASH /root/`
 
 :exclamation: WARNING Before running manually remove any wifi virtual monitor ie wlan0mon0 etc made by the newer airmon-ng
 
