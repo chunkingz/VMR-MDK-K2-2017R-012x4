@@ -1,0 +1,44 @@
+First off S/O to musket teams for such an awesome script.
+
+But I just had to modify it again :-P
+
+to run the script all you have to do is open a terminal and cd into this directory
+and run
+
+chmod +x VMR-MDK-K2-2017R-012x4.sh   <= [to make the script executable]
+
+cp -r VARMAC_* /root/   <= [copy the VARMAC_* directories to root, so that the files can be saved properly during the script execution.]
+
+after that you can run 
+
+./VMR-MDK-K2-2017R-012x4.sh   <= [runs the main script]
+
+
+=================================================
+
+
+I have added a diagnostics tool to it to check if your wireless card is injectable and some extras, all you need to do is, cd into the scripts directory and run it
+
+cd scripts   <= [enter the scripts dir]
+
+./diagnostics.sh wlan0    <= [run the diagnostics script]
+
+where wlan0 is whatever your wireless interface is called, you can check this by running
+
+airmon-ng     <= [shows you your wireless interface, if any]
+
+
+===================================================
+
+MODIFICATIONS MADE:
+1. properly kill processes and restart network services
+2. added a test for card injection using aireplay
+3. properly save the reaver version to a file in the temp dir and output it.
+4. added a diagnostics script in the scripts dir, for testing if your card can inject packets using aireplay, if aircrack is installed, what version of linux you have installed, if you have bash installed, if you have xterm installed, etc...
+
+NOTE: you can find this changes(edits) in the main script (VMR-MDK-K2-2017R-012x4.sh) by using ctrl+f and typing chunkingz
+
+Yours codedly,
+chunkingz
+:bowtie:
+
