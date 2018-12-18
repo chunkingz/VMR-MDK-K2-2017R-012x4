@@ -11,9 +11,9 @@ i will not be held responsible for any harm done to your network or router via t
 
 *if you're lucky and the router uses a default wps pin like 01234567 or 00000000 you're in luck it will take couple of seconds, else it may take some time so just be patient... :relaxed: *
 
-*watch my youtube clip on using the tool here, titled:How to hack WPS locked routers using vmr-mdk with Kali Linux*
+:movie_camera: *watch my youtube clip on using the tool here, titled:How to hack WPS locked routers using vmr-mdk with Kali Linux*
 
-`**https://www.youtube.com/watch?v=y3ByYdVJFqg**`
+:point_right: `**https://www.youtube.com/watch?v=y3ByYdVJFqg**`
 
 
 `Read the "Help Files VMR-MDK-K2-2017R-012x4.txt" file to get a brief on the script what it does and how it works.`
@@ -23,25 +23,25 @@ i will not be held responsible for any harm done to your network or router via t
 # INSTALLATION
 Open your terminal and run this command
 
-`git clone https://github.com/chunkingz/VMR-MDK-K2-2016R-011x9.git`     
+:point_right: `git clone https://github.com/chunkingz/VMR-MDK-K2-2016R-011x9.git`     
 
 Enter the directory
 	
-`cd VMR-MDK-K2-2016R-011x9`
+:point_right: `cd VMR-MDK-K2-2016R-011x9`
 	
 Set your permissions
 
-`chmod +x VMR-MDK-K2-2017R-012x4.sh`  [Enter]
+:point_right: `chmod +x VMR-MDK-K2-2017R-012x4.sh`  [Enter]
 	
 copy the three varmac folders to root [VARMAC_CONFIG, VARMAC_LOGS, VARMAC_WASH]
 	
-`cp -r VARMAC_* /root/`
+:point_right: `cp -r VARMAC_* /root/`
 
 :exclamation: WARNING Before running manually remove any wifi virtual monitor ie wlan0mon0 etc made by the newer airmon-ng
 
 Run by the script 
 	
-`./VMR-MDK-K2-2017R-012x4.sh`  [Enter]
+:point_right: `./VMR-MDK-K2-2017R-012x4.sh`  [Enter]
 
 [optional steps]
 	
@@ -56,13 +56,13 @@ Or place in the user/sbin folder, if you want to be able to call it from anywher
 ## :rocket: Extra Modifications
 I have added a diagnostics tool to it to check if your wireless card is injectable and some extras, all you need to do is, cd into the scripts directory and run it
 
-`cd scripts`   <= [enter the scripts dir]
+:point_right: `cd scripts`   <= [enter the scripts dir]
 
-`./diagnostics.sh wlan0`    <= [run the diagnostics script]
+:point_right: `./diagnostics.sh wlan0`    <= [run the diagnostics script]
 
 where wlan0 is whatever your wireless interface is called, you can check this by running
 
-`airmon-ng`     <= [shows you your wireless interface, if any]
+:point_right: `airmon-ng`     <= [shows you your wireless interface, if any]
 
 
 ################################
