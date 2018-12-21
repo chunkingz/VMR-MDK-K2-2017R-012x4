@@ -23,11 +23,11 @@ i will not be held responsible for any harm done to your network or router via t
 # INSTALLATION
 Open your terminal and run this command
 
-:point_right: `git clone https://github.com/chunkingz/VMR-MDK-K2-2016R-011x9.git`     
+:point_right: `git clone https://github.com/chunkingz/VMR-MDK-K2-2017R-012x4.git`     
 
 Enter the directory
 	
-:point_right: `cd VMR-MDK-K2-2016R-011x9`
+:point_right: `cd VMR-MDK-K2-2017R-012x4`
 	
 Set your permissions
 
