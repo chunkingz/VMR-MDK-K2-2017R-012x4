@@ -13,7 +13,7 @@ i will not be held responsible for any harm done to your network or router via t
 
 :movie_camera: *watch my youtube clip on using the tool here, titled:How to hack WPS locked routers using vmr-mdk with Kali Linux*
 
-:point_right: `**https://www.youtube.com/watch?v=y3ByYdVJFqg**`
+:point_right: [here](https://www.youtube.com/watch?v=y3ByYdVJFqg)
 
 
 `Read the "Help Files VMR-MDK-K2-2017R-012x4.txt" file to get a brief on the script what it does and how it works.`
